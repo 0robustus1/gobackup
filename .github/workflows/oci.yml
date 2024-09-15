@@ -5,6 +5,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  KO_DEFAULTBASEIMAGE: docker.io/huacnlee/gobackup:v2.11.2
 jobs:
   publish:
     name: Publish
