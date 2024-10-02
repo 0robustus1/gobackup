@@ -9,7 +9,7 @@ import (
 
 // OpenSSL encryptor for use openssl aes-256-cbc
 //
-// - chiper: aes-256-cbc
+// - cipher: aes-256-cbc
 // - base64: false
 // - salt: true
 // - password:
@@ -20,7 +20,7 @@ type OpenSSL struct {
 	base64      bool
 	password    string
 	args        string
-	chiper      string
+	cipher      string
 	encryptPath string
 }
 
@@ -28,7 +28,7 @@ func NewOpenSSL(base *Base) *OpenSSL {
 	base.viper.SetDefault("salt", true)
 	base.viper.SetDefault("base64", false)
 	base.viper.SetDefault("args", "")
-	base.viper.SetDefault("chiper", "aes-256-cbc")
+	base.viper.SetDefault("cipher", "aes-256-cbc")
 
 	return &OpenSSL{
 		Base:        *base,
@@ -36,7 +36,7 @@ func NewOpenSSL(base *Base) *OpenSSL {
 		base64:      base.viper.GetBool("base64"),
 		password:    base.viper.GetString("password"),
 		args:        base.viper.GetString("args"),
-		chiper:      base.viper.GetString("chiper"),
+		cipher:      base.viper.GetString("cipher"),
 		encryptPath: base.archivePath + ".enc",
 	}
 }
@@ -58,7 +58,7 @@ func (enc *OpenSSL) perform() (encryptPath string, err error) {
 }
 
 func (enc *OpenSSL) options() (opts []string) {
-	opts = append(opts, enc.chiper)
+	opts = append(opts, enc.cipher)
 	if enc.base64 {
 		opts = append(opts, "-base64")
 	}
