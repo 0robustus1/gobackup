@@ -240,7 +240,7 @@ func tailFile() chan string {
 	out_chan := make(chan string)
 
 	file := fls.LineFile(logFile)
-	if _, err := file.SeekLine(-50, io.SeekEnd); err != nil {
+	if _, err := file.SeekLine(-50, io.SeekEnd); err != nil && err != io.EOF {
 		logger.Errorf("Failed to seek log file: %v", err)
 	}
 	bf := bufio.NewReader(file)
