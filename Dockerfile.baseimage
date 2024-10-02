@@ -30,6 +30,7 @@ RUN apk add \
   libstdc++ \
   gcompat \
   icu \
+  tini \
   # support change timezone
   tzdata \
   && \
